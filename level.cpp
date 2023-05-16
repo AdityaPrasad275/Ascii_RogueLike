@@ -95,8 +95,7 @@ int level::move()
 		//quit cause you're a loser
 		return 1;
 	default:
-		std::cout << "your not hitting the right spots baby, make me cum to fill the hover dam by clicking\n"
-			<< " one of these options q for quit, w for up, a for left, s for down, d for right\n";
+		std::cout << "Not correct key! Try one of these options - \nq for quit,\nw for up,\na for left,\ns for down,\nd for right\n";
 		return move();
 		break;
 	}
