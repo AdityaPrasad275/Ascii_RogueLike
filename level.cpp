@@ -6,7 +6,7 @@ void level::setupLevel()
 	inputMap.open(levelName);
 
 	if (inputMap.fail()) {
-		std::cout << "check the file name dumbass";
+		std::cout << "check the file name";
 		std::cin >> levelName; //to stop the code , not to change levelName ! 
 	}
 
@@ -67,37 +67,37 @@ void level::print()
 	}
 }
 
-int level::move()
+int level::move() 
 {
 	switch (_getch())
 	{
-	case'a':
-		// go left
-		checkToMove(player1->yPos, player1->xPos - 1, 'p');
-		return 0;
-		break;
-	case's':
-		// go down
-		checkToMove(player1->yPos + 1, player1->xPos, 'p');
-		return 0;
-		break;
-	case'd':
-		// go right
-		checkToMove(player1->yPos, player1->xPos + 1, 'p');
-		return 0;
-		break;
-	case'w':
-		// go up
-		checkToMove(player1->yPos - 1, player1->xPos, 'p');
-		return 0;
-		break;
-	case 'q':
-		//quit cause you're a loser
-		return 1;
-	default:
-		std::cout << "Not correct key! Try one of these options - \nq for quit,\nw for up,\na for left,\ns for down,\nd for right\n";
-		return move();
-		break;
+		case 'a':
+			// go left
+			checkToMove(player1->yPos, player1->xPos - 1, 'p');
+			return 0;
+			break;
+		case 's':
+			// go down
+			checkToMove(player1->yPos + 1, player1->xPos, 'p');
+			return 0;
+			break;
+		case 'd':
+			// go right
+			checkToMove(player1->yPos, player1->xPos + 1, 'p');
+			return 0;
+			break;
+		case 'w':
+			// go up
+			checkToMove(player1->yPos - 1, player1->xPos, 'p');
+			return 0;
+			break;
+		case 'q':
+			//quit
+			return 1;
+		default:
+			std::cout << "Not correct key! Try one of these options - q for quit,w for up,a for left,s for down,d for right\n";
+			return move();
+			break;
 	}
 }
 
@@ -176,6 +176,7 @@ int level::battleSystem(monster* _monster)
 		std::string monsterName = _monster->name;
 		int playerAttackChance, monsterAttackChance;
 		srand((unsigned)time(NULL));
+		int waitingTime = 1000;
 
 		while (player1->health > 0 && _monster->health > 0) {
 
@@ -189,22 +190,22 @@ int level::battleSystem(monster* _monster)
 				_monster->health = _monster->health - (player1->damage / (_monster->defense % 10 + 1));
 
 				cout << "you landed a hit !\n\n";
-				Sleep(3000);
+				Sleep(waitingTime);
 
 				if (_monster->health <= 0) {
 					cout << monsterName << " died !! You won\n";
-					Sleep(3000);
+					Sleep(waitingTime);
 					return 1;
 				}
 				else {
 					cout << monsterName << " health : " << _monster->health << endl;
 					cout << "player health : " << player1->health << endl << endl;
-					Sleep(3000);
+					Sleep(waitingTime);
 				}
 			}
 			else {
 				cout << "you didn't land a hit\n\n";
-				Sleep(3000);
+				Sleep(waitingTime);
 			}
 
 			monsterAttackChance = rand() % 100 + 1;
@@ -218,22 +219,22 @@ int level::battleSystem(monster* _monster)
 				player1->health = player1->health - (_monster->damage / (player1->defense % 10 + 1));
 
 				cout << monsterName << " landed a hit !\n\n";
-				Sleep(3000);
+				Sleep(waitingTime);
 
 				if (player1->health <= 0) {
 					cout << "you died !!\n";
-					Sleep(3000);
+					Sleep(waitingTime);
 					return 0;
 				}
 				else {
 					cout << monsterName << " health : " << _monster->health << endl;
 					cout << "player health : " << player1->health << endl << endl;
-					Sleep(3000);
+					Sleep(waitingTime);
 				}
 			}
 			else {
 				cout << monsterName << " didn't land a hit\n\n";
-				Sleep(3000);
+				Sleep(waitingTime);
 			}
 		}
 	}
