@@ -1,6 +1,7 @@
-#include"level.h"
+#include"Level.h"
 
-int main() {
-	level level1;
-	level1._management("level.txt");
+int main()
+{
+	Level level1;
+	level1.management("level.txt");
 }
